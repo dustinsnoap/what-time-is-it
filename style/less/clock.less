@@ -3,6 +3,7 @@ body {
     background-color: #333;
     color: #ccc;
     font-size: 10rem;
+    overflow: hidden;
 }
 .container {
     display: flex;
@@ -21,4 +22,13 @@ li {
 li.current,
 ul:nth-of-type(even) {
     color: #0088ff;
+}
+.overlay {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(to bottom,
+        rgba(51,51,51,1) 0%, rgba(51,51,51,1) 23%,
+        rgba(51,51,51,0) 45%, rgba(51,51,51,0) 55%,
+        rgba(51,51,51,1) 77%,rgba(51,51,51,1) 100%);
 }

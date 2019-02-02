@@ -21,21 +21,31 @@ function setTitle() {
     document.querySelector('head > title').textContent = `${now.hour}:${now.minute}:${now.second}${now.ampm}`
 }
 
+let digits = [
+    {   id:     'hour',
+        min:    1,
+        max:    12
+    },{ id:     'minute',
+        min:    0,
+        max:    59
+    },{ id:     'second',
+        min:    0,
+        max:    59
+    }]
+
 //CLOCK
 window.onload = () => {
-    let clock = document.querySelector('.clock')
-    let minutes = document.getElementById('minute')
-    let seconds = document.getElementById('second')
     let id = setInterval(() => {
-        // ['hour','minute','second'].forEach(digit => setClockDigit(digit));
-        ['hour','minute','second'].forEach(digit => {
-            getNumArray(time.getTime()[digit], 0, 59, 5).forEach((num,i) => {
-                if(digit !== 'hour') if(num < 10) num = `0${num}`
+        digits.forEach(digit => {
+            let digitEl = document.getElementById(digit.id);
+            while(digitEl.firstChild) digitEl.removeChild(digitEl.firstChild);
+            getNumArray(time.getTime()[digit.id], digit.min, digit.max, 5).forEach((num,i) => {
+                if(digit.id !== 'hour') if(num < 10) num = `0${num}`
                 let el = i === 5 ? creatEl('li',num,'current') : creatEl('li',num)
-                document.getElementById(digit).append(el)
+                document.getElementById(digit.id).append(el)
             })
         })
-        clearInterval(id);
+        // clearInterval(id);
     }, 1000)
 }
 
