@@ -24,14 +24,30 @@ function setTitle() {
 //CLOCK
 window.onload = () => {
     let clock = document.querySelector('.clock')
-    let minutes = document.getElementById('minute');
-    setInterval(() => {
-        ['hour','minute','second'].forEach(digit => setClockDigit(digit));
+    let minutes = document.getElementById('minute')
+    let seconds = document.getElementById('second')
+    let id = setInterval(() => {
+        // ['hour','minute','second'].forEach(digit => setClockDigit(digit));
+        ['hour','minute','second'].forEach(digit => {
+            getNumArray(time.getTime()[digit], 0, 59, 5).forEach((num,i) => {
+                if(digit !== 'hour') if(num < 10) num = `0${num}`
+                let el = i === 5 ? creatEl('li',num,'current') : creatEl('li',num)
+                document.getElementById(digit).append(el)
+            })
+        })
+        clearInterval(id);
     }, 1000)
 }
 
 function setClockDigit(id) {
     document.getElementById(id).textContent = time.getTime()[id];
+}
+
+function creatEl(_tag, _text, _class) {
+    let el = document.createElement(_tag)
+    if(_text) el.textContent = _text
+    if(_class) el.classList.add(_class)
+    return el
 }
 
 function getNumArray(num, min, max, extra) {

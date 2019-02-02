@@ -154,4 +154,12 @@ body {
 }
 .clock {
   display: flex;
+  align-items: center;
+}
+li {
+  text-align: right;
+}
+li.current,
+ul:nth-of-type(even) {
+  color: #0088ff;
 }
