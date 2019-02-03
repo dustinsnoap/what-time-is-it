@@ -143,7 +143,7 @@ html > * {
 body {
   background-color: #333;
   color: #ccc;
-  font-size: 10rem;
+  font-size: 40vh;
   overflow: hidden;
 }
 .container {
@@ -168,5 +168,5 @@ ul:nth-of-type(even) {
   position: absolute;
   height: 100vh;
   width: 100vw;
-  background: linear-gradient(to bottom, #333333 0%, #333333 23%, rgba(51, 51, 51, 0) 45%, rgba(51, 51, 51, 0) 55%, #333333 77%, #333333 100%);
+  background: linear-gradient(to bottom, #333333 0%, #333333 15%, rgba(51, 51, 51, 0) 40%, rgba(51, 51, 51, 0) 60%, #333333 85%, #333333 100%);
 }

@@ -35,18 +35,37 @@ let digits = [
 
 //CLOCK
 window.onload = () => {
+    digits.forEach(digit => addNums(digit))
     let id = setInterval(() => {
         digits.forEach(digit => {
-            let digitEl = document.getElementById(digit.id);
-            while(digitEl.firstChild) digitEl.removeChild(digitEl.firstChild);
-            getNumArray(time.getTime()[digit.id], digit.min, digit.max, 5).forEach((num,i) => {
-                if(digit.id !== 'hour') if(num < 10) num = `0${num}`
-                let el = i === 5 ? creatEl('li',num,'current') : creatEl('li',num)
-                document.getElementById(digit.id).append(el)
-            })
+            if(digit.id === 'second') moveUp(digit)
+            // let digitEl = document.getElementById(digit.id);
+            // while(digitEl.firstChild) digitEl.removeChild(digitEl.firstChild);
+            // addNums(digit)
         })
-        // clearInterval(id);
     }, 1000)
+}
+
+function addNums(digit) {
+    let arr = getNumArray(time.getTime()[digit.id], digit.min, digit.max, 2)
+    arr.forEach((num, i) => {
+        if(num < 10) num = `0${num}`
+        let el = i === 2 ? creatEl('li', num) : creatEl('li', num)
+        document.getElementById(digit.id).append(el)
+    })
+}
+
+function moveUp(digit) {
+    let el = document.getElementById(digit.id)
+    el.style.transition = "transform 0.5s ease-in-out"
+    el.style.transform = "translateY(-40vh)"
+    setTimeout(() => {
+        el.style.transition = ""
+        el.style.transform = "translateY(0)"
+        while(el.firstChild) el.removeChild(el.firstChild);
+        addNums(digit)
+
+    },500)
 }
 
 function setClockDigit(id) {
