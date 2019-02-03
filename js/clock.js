@@ -24,26 +24,30 @@ function setTitle() {
 let digits = [
     {   id:     'hour',
         min:    1,
-        max:    12
+        max:    12,
+        sec:    3600,
+        tens:   false,
     },{ id:     'minute',
         min:    0,
-        max:    59
+        max:    59,
+        sec:    60,
+        tens:   true,
     },{ id:     'second',
         min:    0,
-        max:    59
+        max:    59,
+        sec:    1,
+        tens:   true,
     }]
 
 //CLOCK
 window.onload = () => {
     digits.forEach(digit => addNums(digit))
-    let id = setInterval(() => {
-        digits.forEach(digit => {
-            if(digit.id === 'second') moveUp(digit)
-            // let digitEl = document.getElementById(digit.id);
-            // while(digitEl.firstChild) digitEl.removeChild(digitEl.firstChild);
-            // addNums(digit)
-        })
-    }, 1000)
+    digits.forEach(digit => {
+        setInterval(() => {
+            moveUp(digit)
+            console.log(`digit: ${digit.id} - sec: ${digit.sec}`)
+        }, digit.sec * 1000)
+    })
 }
 
 function addNums(digit) {
